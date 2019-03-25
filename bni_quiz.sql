@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2019 at 02:30 AM
+-- Generation Time: Mar 25, 2019 at 09:53 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -94,6 +94,43 @@ INSERT INTO `hadiah` (`kd_hadiah`, `nama_hadiah`, `stok`) VALUES
 ('H-002', 'ASUS ROG', 3),
 ('H-003', 'SANDAL JEPIT', 8),
 ('H-004', 'TUTUP PANCI', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kuesioner`
+--
+
+CREATE TABLE `kuesioner` (
+  `kd_kuesioner` varchar(25) NOT NULL,
+  `kd_user` varchar(25) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `umur` varchar(50) DEFAULT NULL,
+  `jenis_kelamin` varchar(5) DEFAULT NULL,
+  `pekerjaan` int(5) DEFAULT NULL,
+  `no_telpon` varchar(50) DEFAULT NULL,
+  `bersedia` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `domisili` varchar(50) DEFAULT NULL,
+  `penghasilan` int(5) DEFAULT NULL,
+  `bank_utama` varchar(50) DEFAULT NULL,
+  `produk_bank_utama` varchar(255) DEFAULT NULL,
+  `produk_bni` varchar(50) DEFAULT NULL,
+  `produk_bank_bni` varchar(255) DEFAULT NULL,
+  `rencana` varchar(255) DEFAULT NULL,
+  `tanggal_quiz` datetime NOT NULL,
+  `kd_hadiah` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kuesioner`
+--
+
+INSERT INTO `kuesioner` (`kd_kuesioner`, `kd_user`, `nama`, `umur`, `jenis_kelamin`, `pekerjaan`, `no_telpon`, `bersedia`, `email`, `domisili`, `penghasilan`, `bank_utama`, `produk_bank_utama`, `produk_bni`, `produk_bank_bni`, `rencana`, `tanggal_quiz`, `kd_hadiah`) VALUES
+('K-001', 'K-004', 'aaaa', '23', 'P', 1, '0789789789', 'tidak bersedia', 'admin@admin.com', 'jakarta', 2, 'BCA', 'tabungan_utama,giro_utama,kartu_kredit_utama', 'YA', 'giro_bni,deposit_bni', 'sekolah,menikah,beli_kendaraan,buka_usaha', '2019-03-25 09:09:15', 'H-002'),
+('K-002', 'K-004', 'mamat', '22', 'L', 5, '07899789', 'bersedia', 'admin@admin.com', 'cirebon', 2, 'BRI', 'giro_utama,deposit_utama,kartu_kredit_utama', 'YA', 'tabungan_bni,deposit_bni', 'sekolah,menikah,wisata', '2019-03-25 09:17:43', 'H-001'),
+('K-003', 'K-004', 'ooo', '88', 'P', 1, '0890890', 'tidak bersedia', 'admin@admin.com', 'jakarta', 2, 'Mandiri', 'giro_utama,deposit_utama,kartu_kredit_utama', 'YA', 'tabungan_bni,giro_bni', 'menikah,beli_rumah,beli_kendaraan', '2019-03-25 09:31:06', 'H-002'),
+('K-004', 'K-004', 'mamat nurahmat', '19', 'L', 2, '0789789', 'bersedia', 'admin@admin.com', 'jakarta', 2, 'Mandiri', 'giro_utama,deposit_utama', 'YA', 'giro_bni,kartu_kredit_bni', 'sekolah,menikah,beli_kendaraan', '2019-03-25 09:52:58', 'H-001');
 
 -- --------------------------------------------------------
 
@@ -242,6 +279,12 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `hadiah`
   ADD PRIMARY KEY (`kd_hadiah`);
+
+--
+-- Indexes for table `kuesioner`
+--
+ALTER TABLE `kuesioner`
+  ADD PRIMARY KEY (`kd_kuesioner`);
 
 --
 -- Indexes for table `penjualan_header`
