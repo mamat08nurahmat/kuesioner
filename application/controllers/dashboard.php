@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller{
 			'dt_dashboard'=>$this->db->query('
 SELECT 
 DATE_FORMAT(q.tanggal_quiz, "%d-%m-%Y") as tanggal ,u.nama ,count(q.kd_user) as jumlah 
-FROM quiz q
+FROM kuesioner q
 INNER JOIN users u ON q.kd_user=u.kd_user
 GROUP BY u.nama
 ORDER BY jumlah DESC			

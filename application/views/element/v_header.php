@@ -71,7 +71,7 @@
                         <a href="<?php echo site_url('dashboard')?>"><i class="icon-home"></i> Dashboard</a>
                     </li>
                     <li class="<?php if(isset($active_penjualan)){echo $active_penjualan ;}?>">
-                        <a href="<?php echo site_url('quiz/quiz_list')?>" target="_blank"><i class="icon-barcode"></i>Report Kuesioner</a>
+                        <a href="<?php echo site_url('quiz/quiz_list')?>"><i class="icon-barcode"></i>Report Kuesioner</a>
                     </li>
                     <li class="<?php if(isset($active_laporan)){echo $active_laporan ;}?>">
                         <a href="<?php echo site_url('quiz')?>"><i class="icon-file"></i>VIEW KUESIONER</a>

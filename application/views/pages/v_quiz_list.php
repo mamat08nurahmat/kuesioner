@@ -21,7 +21,7 @@
             <tr class="gradeX">
                 <td><?php echo $no++; ?></td>
                 <td><?php echo date("d M Y",strtotime($row->tanggal_quiz)); ?></td>
-                <td><?=$row->nama_lengkap ?></td>
+                <td><?=$row->nama?></td>
                 <td><?=$row->nama_hadiah ?></td>
                 <td><?=$row->nama ?></td>
 			

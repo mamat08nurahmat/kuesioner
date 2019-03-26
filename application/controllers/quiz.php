@@ -12,7 +12,7 @@ class Quiz extends CI_Controller{
 //        $this->load->helper('currency_format_helper');
     }
 
-    function index(){
+    function index2(){
 		
 		
 //print_r($this->model_app->getKodeQuiz());die();
@@ -83,8 +83,8 @@ class Quiz extends CI_Controller{
 			
             'data_quiz'=>$this->db->query("
 			SELECT 
-			q.tanggal_quiz,q.nama_lengkap,h.nama_hadiah,u.nama 
-			FROM quiz q
+			q.tanggal_quiz,q.nama,h.nama_hadiah,u.nama 
+			FROM kuesioner q
 			INNER JOIN hadiah h ON q.kd_hadiah=h.kd_hadiah
 			INNER JOIN users u ON q.kd_user=u.kd_user 
 			".$where."
@@ -141,19 +141,120 @@ $this->load->view('pages/v_draw');
 		
 	}
 	
-	function tes_submit(){
-		
-print_r($_POST);die();		
-		
-	}
 	
 	
-		function tes(){
+	function index(){
+        
+        $data=array(
+            'title'=>'Kuesioner',
+            //'active_quiz'=>'active',
+			// 'kd_quiz'=>$this->model_app->getKodeQuiz(),
+            //'data_penjualan'=>$this->model_app->getAllDataPenjualan(),
+        );
+		// $data['data_hadiah'] = $this->db->query("SELECT * FROM hadiah WHERE stok >0")->result();
 		
-$this->load->view('v_tes');		
+//        $this->load->view('element/v_header_public',$data);
+        // $this->load->view('pages/v_quiz_public',$data);        
+        $this->load->view('v_tes',$data);		
 		
 		
-	}
+    }
+    
+    function tes_submit(){
+                
+        // print_r($_POST);die();		
 
+
+        // $elements = array();
+        // foreach($names as $name) {
+        //     //do something
+        //     // $elements[] = '<a href="' . $url . '" title="' . $title . '">' . $name .'</a>';            
+        //     $elements[] = $name;
+        // }
+
+        
+        $produk_bank_utama =  implode(',', $this->input->post('produk_bank_utama'));
+        $produk_bank_bni =  implode(',', $this->input->post('produk_bank_bni'));
+        $rencana =  implode(',', $this->input->post('rencana'));
+        // $bersedia = $this->input->post('bersedia');
+            if($this->input->post('bersedia') == 'bersedia'){
+                $bersedia='bersedia';
+            }else{
+                $bersedia='tidak bersedia';
+            }
+        // print_r($produk_bank_utama);
+        // print_r('<br>');
+        // print_r($produk_bank_bni);
+        // print_r('<br>');
+        // print_r($rencana);        
+        // die();
+
+        $kd_kuesioner=$this->model_app->getKodeKuesioner();
+
+
+
+        
+        $data = array(
+            'kd_kuesioner'=> $kd_kuesioner,
+            'kd_user'=>$_SESSION['ID'], //$this->input->post('kd_user'),
+            'nama' =>$this->input->post('nama'),
+            'umur' =>$this->input->post('umur'),
+            'jenis_kelamin' =>$this->input->post('jenis_kelamin'),
+            'pekerjaan' => $this->input->post('pekerjaan'),
+            'no_telpon' => $this->input->post('no_telpon'),
+            'bersedia' => $bersedia,
+            'email' => $this->input->post('email'),
+            'domisili' => $this->input->post('domisili'),
+            'penghasilan' => $this->input->post('penghasilan'),
+            'bank_utama' => $this->input->post('bank_utama'),
+
+            'produk_bank_utama' => $produk_bank_utama,
+
+            'produk_bni' => $this->input->post('produk_bni'),
+            
+            'produk_bank_bni' => $produk_bank_bni,
+
+            'rencana' => $rencana,
+
+            'tanggal_quiz'  =>  date("Y-m-d H:i:s") //date("Y-m-d"),
+
+
+        );
+        $this->model_app->insertData('kuesioner',$data);
+        // $this->model_app->getKurangStokHadiah($this->input->post('kd_hadiah'));
+// print_r($data);die();
+        redirect("quiz/tes_draw/".$kd_kuesioner);
+
+    }
+	
+    function tes_draw($kd_kuesioner){
+                
+        $data=array(
+            'title'=>'Lucky Draw',
+            //'active_quiz'=>'active',
+			'kd_kuesioner'=>$kd_kuesioner,
+            //'data_penjualan'=>$this->model_app->getAllDataPenjualan(),
+        );
+        $data['data_hadiah'] = $this->db->query("SELECT * FROM hadiah WHERE stok >0")->result();
+        $this->load->view('/pages/v_tes_draw',$data);		
+                
+    }
+
+    function submit_draw(){
+
+    //     print_r($_POST);die();
+    // $kd_kuesioner = $this->input->post('kd_kuesioner');
+    // $kd_hadiah =  $this->input->post('kd_hadiah');
+        
+    $id['kd_kuesioner'] = $this->input->post('kd_kuesioner');
+    $data=array(
+        'kd_hadiah'=>$this->input->post('kd_hadiah')
+    );
+    $this->model_app->updateData('kuesioner',$data,$id);
+    redirect("dashboard");
+
+
+
+    }
 	
 }

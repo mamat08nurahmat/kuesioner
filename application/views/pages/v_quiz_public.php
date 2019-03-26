@@ -202,13 +202,13 @@ button:hover {
   <div class="tab">
   <center>
    <div id="chart"></div>
-	  
+<input type="text">	  
 	<p><h1>ANDA MENDAPATKAN ...???</h1></p>
 
 	<div id="question"><h1></h1></div>
 	
-	<p><input type="hidden" value=""  name="kd_hadiah" id="kd_hadiah" ></p>
   </center>
+	<input type="text" value=""  name="kd_hadiah" id="kd_hadiah">
 
   </div>
 <!----->

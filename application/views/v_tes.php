@@ -209,64 +209,162 @@ input[type=checkbox]:checked:disabled + label:before {
 </style>
 <body>
 
-<form id="regForm" action="/action_page.php">
-  <h1>Register:</h1>
+<form id="regForm" action="<?=site_url("/quiz/tes_submit")?>" method="POST">
+  <h1>Kuesioner:</h1>
   <!-- One "tab" for each step in the form: -->
+
+  <!-- TAB 1 -->
   <div class="tab">
-    <p>First Name</p>
-    <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
-    <p>last Name</p>
-    <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
-	<p>JENIS KELAMIN</p>    
+
+    <p>Nama</p>
+    <p><input placeholder="Nama lengkap..." oninput="this.className = ''" name="nama"></p>
+
+    <p>Umur</p>
+    <p><input placeholder="Umur..." oninput="this.className = ''" name="umur"></p>
+
+    <p>Jenis Kelamin</p>
     <p>
-    <select oninput="this.className = ''" name="pilihan">
+      <input type="radio" id="L" name="jenis_kelamin" value="L" checked>
+      <label for="L">Laki-Laki</label>
+    </p>
+
+    <p>
+      <input type="radio" id="P" name="jenis_kelamin" value="P">
+      <label for="P">perempuan</label>
+    </p>
+
+    <p>PEKERJAAN</p>    
+    <p>
+    <select oninput="this.className = ''" name="pekerjaan">
     <option value="">-PILIH-</option>
-    <option value="1">LAKI_LAKI</option>
-    <option value="2">PEREMPUAN</option>
+    <option value="1">TNI/POLRI</option>
+    <option value="2">BUMN</option>
+    <option value="3">Swasta/Pengusaha/Wirausaha</option>
+    <option value="4">Pelajar/Mahasiswa</option>
+    <option value="5">Profesional</option>
+    <option value="6">Ibu Rumah tangga</option>
+    <option value="7">Pensiunan</option>
     </select>
     </p>
+
+  </div>
+
+  <!-- TAB 2 -->  
+  <div class="tab">
+
     
-    <p>Checkbox</p>
+    <p>No Telpon</p>
+    <p><input placeholder="Nomer Telpon" oninput="this.className = ''" name="no_telpon"></p>
+ 
+    <p>-</p>
     <p>    
-      <input type="checkbox" id="fruit1" name="fruit-1" value="Apple">
-      <label for="fruit1">Apple</label>
-      <input type="checkbox" id="fruit2" name="fruit-2" value="Banana" disabled>
-      <label for="fruit2">Banana</label>
-      <input type="checkbox" id="fruit3" name="fruit-3" value="Cherry" checked disabled>
-      <label for="fruit3">Cherry</label>
-      <input type="checkbox" id="fruit4" name="fruit-4" value="Strawberry">
-      <label for="fruit4">Strawberry</label>
+      <input type="checkbox" id="bersedia" name="bersedia" value="bersedia">
+      <label for="bersedia">Bersedia dihubungi dikemudian hari</label>
     </p>
 
-	<p>Radio</p>
+    <p>Alamat Email</p>
+    <p><input placeholder="Alamat Email..." oninput="this.className = ''" name="email"></p>
+
+    <p>Domisili</p>
+    <p><input placeholder="Domisili..." oninput="this.className = ''" name="domisili"></p>
+
+    <p>Penghasilan</p>    
     <p>
-      <input type="radio" id="test1" name="radio-group" checked>
-      <label for="test1">Apple</label>
+    <select oninput="this.className = ''" name="penghasilan">
+    <option value="">-PILIH-</option>
+    <option value="1">< Rp.3.000.000</option>
+    <option value="2">Rp.3.000.000 - Rp.5.000.000</option>
+    <option value="3">Rp.5.000.000 - Rp.10.000.000</option>
+    <option value="4">Rp.10.000.000 - Rp.25.000.000</option>
+    <option value="5">> Rp.25.000.000 </option>
+    </select>
     </p>
+
+
+
+
+
+
+  </div>
+
+  <!-- TAB 3 -->  
+  <div class="tab">
+
+  <p>Bank Utama Yang Digunakan</p>    
     <p>
-      <input type="radio" id="test2" name="radio-group">
-      <label for="test2">Peach</label>
+    <select oninput="this.className = ''" name="bank_utama">
+    <option value="">-PILIH-</option>
+    <option value="BNI">BNI</option>
+    <option value="BCA">BCA</option>
+    <option value="Mandiri">Mandiri</option>
+    <option value="BRI">BRI</option>
+    <option value="BPD">BPD</option>
+    <option value="Niaga">Niaga</option>
+    <option value="Mega">Mega</option>
+    <option value="Lainnya">Lainnya</option>
+    </select>
     </p>
-    <p>
-      <input type="radio" id="test3" name="radio-group">
-      <label for="test3">Orange</label>
+
+    <p>Produk Yang Dimiliki Di bank Utama</p>
+    <p>    
+      <input type="checkbox" id="tabungan_utama" name="produk_bank_utama[]" value="tabungan_utama">
+      <label for="tabungan_utama">Tabungan</label>
+      <input type="checkbox" id="giro_utama" name="produk_bank_utama[]" value="giro_utama">
+      <label for="giro_utama">Giro</label>
+      <input type="checkbox" id="deposit_utama" name="produk_bank_utama[]" value="deposit_utama">
+      <label for="deposit_utama">Deposit</label>
+      <input type="checkbox" id="kartu_kredit_utama" name="produk_bank_utama[]" value="kartu_kredit_utama">
+      <label for="kartu_kredit_utama">Kartu Kredit</label>
     </p>
 
   </div>
-  
-  <div class="tab">Contact Info:
-    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
-    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+
+
+  <!-- TAB 4 -->  
+  <div class="tab">
+
+  <p>Apakah Memiliki Produk BNI</p>
+    <p>
+      <input type="radio" id="test1" name="produk_bni" value="YA" checked>
+      <label for="test1">Ya</label>
+    </p>
+    <p>
+      <input type="radio" id="test2" name="produk_bni" value="TIDAK">
+      <label for="test2">Tidak</label>
+    </p>
+
+
+    <p>Produk Yang Dimiliki Di BNI</p>
+    <p>    
+      <input type="checkbox" id="tabungan_bni" name="produk_bank_bni[]" value="tabungan_bni">
+      <label for="tabungan_bni">Tabungan</label>
+      <input type="checkbox" id="giro_bni" name="produk_bank_bni[]" value="giro_bni">
+      <label for="giro_bni">Giro</label>
+      <input type="checkbox" id="deposit_bni" name="produk_bank_bni[]" value="deposit_bni">
+      <label for="deposit_bni">Deposit</label>
+      <input type="checkbox" id="kartu_kredit_bni" name="produk_bank_bni[]" value="kartu_kredit_bni">
+      <label for="kartu_kredit_bni">Kartu Kredit</label>
+    </p>
+
+    <p>Target / Rencana Di Masa Depan (Pilih Berdasarkan Prioritas)</p>
+    <p>    
+      <input type="checkbox" id="sekolah" name="rencana[]" value="sekolah">
+      <label for="sekolah">Sekolah/Kuliah</label>
+      <input type="checkbox" id="menikah" name="rencana[]" value="menikah">
+      <label for="menikah">Menikah</label>
+      <input type="checkbox" id="beli_rumah" name="rencana[]" value="beli_rumah">
+      <label for="beli_rumah">Beli Rumah Baru</label>
+      <input type="checkbox" id="beli_kendaraan" name="rencana[]" value="beli_kendaraan">
+      <label for="beli_kendaraan">Beli Kendaraan Baru</label>
+      <input type="checkbox" id="wisata" name="rencana[]" value="wisata">
+      <label for="wisata">Wisata/Berlibur</label>
+      <input type="checkbox" id="buka_usaha" name="rencana[]" value="buka_usaha">
+      <label for="buka_usaha">Buka Usaha</label>
+    </p>
+
   </div>
-  <div class="tab">Birthday:
-    <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
-    <p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
-    <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
-  </div>
-  <div class="tab">Login Info:
-    <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
-    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
-  </div>
+
+
   <div style="overflow:auto;">
     <div style="float:right;">
       <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
@@ -317,6 +415,7 @@ function nextPrev(n) {
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
     // ... the form gets submitted:
+      confirm('Subbmit?');    
     document.getElementById("regForm").submit();
     return false;
   }
