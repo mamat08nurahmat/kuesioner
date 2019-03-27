@@ -3,9 +3,10 @@
     <tr>
         <th>No</th>
         <th>User Code</th>
-        <th>User Mail</th>
+        <th>User NPP</th>
         <th>User Name</th>
         <th>Level</th>
+        <th>Institusi</th>
         <th class="span2">
             <a href="#modalAddUser" class="btn btn-mini btn-block btn-inverse" data-toggle="modal">
                 <i class="icon-plus-sign icon-white"></i> Tambah Data
@@ -23,9 +24,10 @@
             <tr>
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $row->kd_user; ?></td>
-                <td><?php echo $row->email; ?></td>
+                <td><?php echo $row->npp; ?></td>
                 <td><?php echo $row->nama; ?></td>
                 <td><?php echo $row->level; ?></td>
+                <td><?php echo $row->kd_institusi; ?></td>
 
                 <td>
                     <a class="btn btn-mini" href="#modalEditUser<?php echo $row->kd_user?>" data-toggle="modal"><i class="icon-pencil"></i> Edit</a>
@@ -56,9 +58,9 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" >User Mail</label>
+                <label class="control-label" >User NPP</label>
                 <div class="controls">
-                    <input name="email" type="email" required>
+                    <input name="npp" type="text" required>
                 </div>
             </div>
 
@@ -90,6 +92,26 @@
                     </select>
                 </div>
             </div>
+
+
+            <div class="control-group">
+                <label class="control-label">Institusi</label>
+                <div class="controls">
+                    <select name="kd_institusi" id="kd_institusi">
+                        <option value=""> = Pilih Level Akses = </option>
+                <?php
+                foreach($data_institusi as $i){
+                    ?>                        
+                        <option value="<?=$i->kd_institusi?>"><?=$i->nama_institusi?></option>
+                    <?php
+                    }
+                    ?>                        
+
+                    </select>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="modal-footer">
@@ -121,9 +143,9 @@ if (isset($data_user)){
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" >Email</label>
+                        <label class="control-label" >NPP</label>
                         <div class="controls">
-                            <input name="email" type="email" value="<?php echo $row->email?>" required>
+                            <input name="npp" type="text" value="<?php echo $row->npp?>" required>
                         </div>
                     </div>
 
@@ -155,6 +177,24 @@ if (isset($data_user)){
                             </select>
                         </div>
                     </div>
+
+                    <div class="control-group">
+                <label class="control-label">Institusi</label>
+                <div class="controls">
+                    <select name="kd_institusi" id="kd_institusi">
+                        <option value=""> = Pilih Level Akses = </option>
+                <?php
+                foreach($data_institusi as $i){
+                    ?>                        
+                        <option value="<?=$i->kd_institusi?>"><?=$i->nama_institusi?></option>
+                    <?php
+                    }
+                    ?>                        
+
+                    </select>
+                </div>
+            </div>
+
                 </div>
 
                 <div class="modal-footer">

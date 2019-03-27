@@ -98,10 +98,10 @@ $db['default'] = array(
 
 $db['default'] = array(
 	'dsn'	=> '',
-    'hostname' => 'localhost',
+    'hostname' => 'ec2-35-163-208-30.us-west-2.compute.amazonaws.com',
 	'username' => 'root',
-	'password' => '',
-	'database' => 'bni_quiz',
+	'password' => 'tiger',
+	'database' => 'kuesioner',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

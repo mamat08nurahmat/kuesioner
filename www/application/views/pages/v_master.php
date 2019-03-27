@@ -9,6 +9,7 @@
 		
         <li class="active"><a href="#tabHadiah" data-toggle="tab"><strong>HADIAH</strong></a></li>
         <li><a href="#tabUser" data-toggle="tab"><strong>USER</strong></a></li>
+        <li><a href="#tabInstitusi" data-toggle="tab"><strong>INSTITUSI</strong></a></li>
 <!--
         <li><a href="#tabReportHadiah" data-toggle="tab"><strong>Report hadiah</strong></a></li>
 -->		
@@ -33,6 +34,10 @@
         <div class="tab-pane" id="tabUser">
             <?php $this->load->view('pages/v_tab_master_user')?>
         </div>
+        <div class="tab-pane" id="tabInstitusi">
+            <?php $this->load->view('pages/v_tab_master_institusi')?>
+        </div>
+
 <!--
 		
       <div class="tab-pane" id="tabReportHadiah">
