@@ -8,7 +8,7 @@
         <th>Tanggal</th>
         <th>Nama Kuesioner</th>
         <th>Hadiah</th>
-        <th>Sales</th>
+        <th>User</th>
             </tr>
         </thead>
         <tbody>	
@@ -21,9 +21,9 @@
             <tr class="gradeX">
                 <td><?php echo $no++; ?></td>
                 <td><?php echo date("d M Y",strtotime($row->tanggal_quiz)); ?></td>
-                <td><?=$row->nama?></td>
+                <td><?=$row->nama_q?></td>
                 <td><?=$row->nama_hadiah ?></td>
-                <td><?=$row->nama ?></td>
+                <td><?=$row->nama_u ?></td>
 			
             </tr>
         <?php }

@@ -83,7 +83,7 @@ class Quiz extends CI_Controller{
 			
             'data_quiz'=>$this->db->query("
 			SELECT 
-			q.tanggal_quiz,q.nama,h.nama_hadiah,u.nama 
+			q.tanggal_quiz,q.nama as nama_q,h.nama_hadiah,u.nama as nama_u 
 			FROM kuesioner q
 			INNER JOIN hadiah h ON q.kd_hadiah=h.kd_hadiah
 			INNER JOIN users u ON q.kd_user=u.kd_user 
@@ -228,14 +228,17 @@ $this->load->view('pages/v_draw');
     }
 	
     function tes_draw($kd_kuesioner){
-                
+              
+$kd_institusi = $_SESSION['KD_INSTITUSI'];
+// print_r($kd_institusi);die();           
+
         $data=array(
             'title'=>'Lucky Draw',
             //'active_quiz'=>'active',
 			'kd_kuesioner'=>$kd_kuesioner,
             //'data_penjualan'=>$this->model_app->getAllDataPenjualan(),
         );
-        $data['data_hadiah'] = $this->db->query("SELECT * FROM hadiah WHERE stok >0")->result();
+        $data['data_hadiah'] = $this->db->query("SELECT * FROM hadiah WHERE stok >0 AND kd_institusi='$kd_institusi'")->result();
         $this->load->view('/pages/v_tes_draw',$data);		
                 
     }
@@ -245,7 +248,9 @@ $this->load->view('pages/v_draw');
     //     print_r($_POST);die();
     // $kd_kuesioner = $this->input->post('kd_kuesioner');
     // $kd_hadiah =  $this->input->post('kd_hadiah');
-        
+//kurang stok
+    $this->model_app->getKurangStokHadiah($this->input->post('kd_hadiah'));
+
     $id['kd_kuesioner'] = $this->input->post('kd_kuesioner');
     $data=array(
         'kd_hadiah'=>$this->input->post('kd_hadiah')

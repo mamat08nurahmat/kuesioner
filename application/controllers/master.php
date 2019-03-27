@@ -11,6 +11,14 @@ class Master extends CI_Controller{
     }
 
     function index(){
+
+        $kd_institusi= $_SESSION['KD_INSTITUSI'];
+        if($kd_institusi=='ALL'){
+            $where =  "" ;      
+        }else{
+            $where =  "WHERE h.kd_institusi='$kd_institusi'" ;      
+        }
+        
         $data=array(
             'title'=>'Master Data',
             'active_master'=>'active',
@@ -18,27 +26,66 @@ class Master extends CI_Controller{
 //            'kd_store'=>$this->model_app->getKodeStore(),
             'kd_user'=>$this->model_app->getKodeUser(),
 			'kd_hadiah'=>$this->model_app->getKodeHadiah(),
+			'kd_institusi'=>$this->model_app->getKodeInstitusi(),
 			
  //           'data_produk'=>$this->model_app->getAllData('produk'),
   //          'data_store'=>$this->model_app->getAllData('store'),
             'data_contact'=>$this->model_app->getAllData('contact'),
             'data_user'=>$this->model_app->getAllData('users'),
+
+            'data_institusi'=>$this->db->query("SELECT * FROM institusi	")->result(),
             'data_hadiah'=>$this->db->query("
-SELECT h.kd_hadiah,h.nama_hadiah,h.stok ,
-CASE 
-WHEN q.keluar IS NULL THEN 0
-ELSE
-q.keluar
-END
-as
-keluar
-FROM hadiah h
-LEFT JOIN 
-(
-SELECT q.kd_hadiah,count(q.kd_hadiah) as keluar from quiz q
-group by q.kd_hadiah
-) q on h.kd_hadiah=q.kd_hadiah	
-			")->result(),
+            SELECT 
+            h.kd_hadiah,
+            h.nama_hadiah,
+            i.nama_institusi,
+            h.stok,
+            
+            CASE 
+            WHEN q.keluar IS NULL THEN 0
+            ELSE
+            q.keluar
+            END
+            as
+            keluar,
+            -- h.stok + keluar
+            CASE 
+            WHEN h.stok + keluar IS NULL THEN 0
+            ELSE
+            h.stok + keluar
+            END
+            as
+            total
+            FROM hadiah	h
+            LEFT JOIN institusi i ON h.kd_institusi=i.kd_institusi 
+             LEFT JOIN 
+            (
+            SELECT q.kd_hadiah,count(q.kd_hadiah) as keluar from kuesioner q
+            group by q.kd_hadiah
+            ) q on h.kd_hadiah=q.kd_hadiah	
+            ".$where."
+            
+            ")->result(),
+
+            
+
+
+//             'data_hadiah'=>$this->db->query("
+// SELECT h.kd_hadiah,h.kd_institusi,h.stok ,
+// CASE 
+// WHEN q.keluar IS NULL THEN 0
+// ELSE
+// q.keluar
+// END
+// as
+// keluar
+// FROM hadiah h
+// LEFT JOIN 
+// (
+// SELECT q.kd_hadiah,count(q.kd_hadiah) as keluar from quiz q
+// group by q.kd_hadiah
+// ) q on h.kd_hadiah=q.kd_hadiah	
+// 			")->result(),
 
 			
 			
@@ -61,11 +108,24 @@ group by u.nama,h.nama_hadiah,h.stok
     }
     
 //    ===================== INSERT =====================
+
+function tambah_institusi(){
+    $data=array(
+        'kd_institusi'=>$this->input->post('kd_institusi'),
+        'nama_institusi'=>$this->input->post('nama_institusi'),
+        'rm'=>$this->input->post('rm'),
+       );
+    $this->model_app->insertData('institusi',$data);
+    redirect("master");
+}
+
+
     function tambah_hadiah(){
         $data=array(
             'kd_hadiah'=>$this->input->post('kd_hadiah'),
             'nama_hadiah'=>$this->input->post('nama_hadiah'),
             'stok'=>$this->input->post('stok'),
+            'kd_institusi'=>$this->input->post('kd_institusi'),
            );
         $this->model_app->insertData('hadiah',$data);
         redirect("master");
@@ -94,10 +154,11 @@ group by u.nama,h.nama_hadiah,h.stok
     function tambah_user(){
         $data=array(
             'kd_user'=> $this->input->post('kd_user'),
-            'email'=>$this->input->post('email'),
+            'npp'=> $this->input->post('npp'),
             'password'=>md5($this->input->post('password')),
             'nama'=> $this->input->post('nama'),
             'level'=>$this->input->post('level'),
+            'kd_institusi'=>$this->input->post('kd_institusi'),
         );
         $this->model_app->insertData('users',$data);
         redirect("master");
@@ -105,11 +166,22 @@ group by u.nama,h.nama_hadiah,h.stok
 
 
 //    ======================== EDIT =======================
+function edit_institusi(){
+    $id['kd_institusi'] = $this->input->post('kd_institusi');
+    $data=array(
+        'nama_institusi'=>$this->input->post('nama_institusi'),
+        'rm'=>$this->input->post('rm'),
+    );
+    $this->model_app->updateData('institusi',$data,$id);
+    redirect("master");
+}
+
     function edit_hadiah(){
         $id['kd_hadiah'] = $this->input->post('kd_hadiah');
         $data=array(
             'nama_hadiah'=>$this->input->post('nama_hadiah'),
             'stok'=>$this->input->post('stok'),
+            'kd_institusi'=>$this->input->post('kd_institusi'),            
         );
         $this->model_app->updateData('hadiah',$data,$id);
         redirect("master");
@@ -152,10 +224,11 @@ group by u.nama,h.nama_hadiah,h.stok
     function edit_user(){
         $id['kd_user'] = $this->input->post('kd_user');
         $data=array(
-            'email'=>$this->input->post('email'),
+            'npp'=>$this->input->post('npp'),
             'password'=>md5($this->input->post('password')),
             'nama'=> $this->input->post('nama'),
             'level'=>$this->input->post('level'),
+            'kd_institusi'=>$this->input->post('kd_institusi'),
         );
         $this->model_app->updateData('users',$data,$id);
         redirect("master");

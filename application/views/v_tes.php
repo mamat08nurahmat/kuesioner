@@ -237,13 +237,14 @@ input[type=checkbox]:checked:disabled + label:before {
     <p>
     <select oninput="this.className = ''" name="pekerjaan">
     <option value="">-PILIH-</option>
-    <option value="1">TNI/POLRI</option>
-    <option value="2">BUMN</option>
-    <option value="3">Swasta/Pengusaha/Wirausaha</option>
-    <option value="4">Pelajar/Mahasiswa</option>
-    <option value="5">Profesional</option>
-    <option value="6">Ibu Rumah tangga</option>
-    <option value="7">Pensiunan</option>
+    <option value="1">ASN</option>
+    <option value="2">TNI/POLRI</option>    
+    <option value="3">BUMN</option>
+    <option value="4">Swasta/Pengusaha/Wirausaha</option>
+    <option value="5">Pelajar/Mahasiswa</option>
+    <option value="6">Profesional</option>
+    <option value="7">Ibu Rumah tangga</option>
+    <option value="8">Pensiunan</option>
     </select>
     </p>
 

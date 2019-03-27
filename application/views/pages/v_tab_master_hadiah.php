@@ -2,11 +2,17 @@
     <thead>
     <tr>
         <th>No</th>
-        <th>Kode hadiah</th>
-        <th>Nama</th>
+        <th>Institusi</th>
+        <th>Hadiah</th>
         <th>Stok</th>
         <th>Keluar</th>
+        <th>total</th>
+<!--
+
+        <th>Keluar</th>
         <th>Total</th>
+-->
+
         <th class="span2">
             <a href="#modalAddHadiah" class="btn btn-mini btn-block btn-inverse" data-toggle="modal">
                 <i class="icon-plus-sign icon-white"></i> Tambah Data
@@ -23,11 +29,16 @@
     ?>
     <tr>
         <td><?php echo $no++; ?></td>
-        <td><?php echo $row->kd_hadiah; ?></td>
-        <td><?php echo $row->nama_hadiah; ?></td>
+        <td><?php echo $row->nama_institusi; ?></td>
+        <td><?php echo strtoupper($row->nama_hadiah); ?></td>
         <td><?php echo $row->stok; ?></td>
         <td><?php echo $row->keluar; ?></td>
-        <td><?php echo $row->stok+$row->keluar; ?></td>
+        <td><?php echo $row->total; ?></td>
+<!--
+
+        <td><?//php echo $row->keluar; ?></td>
+        <td><?//php echo $row->stok+$row->keluar; ?></td>
+-->
          <td>
             <a class="btn btn-mini" href="#modalEditHadiah<?php echo $row->kd_hadiah?>" data-toggle="modal"><i class="icon-pencil"></i> Edit</a>
 <!----
@@ -76,7 +87,25 @@
             </div>
 
 
+            <div class="control-group">
+                <label class="control-label">Institusi</label>
+                <div class="controls">
+                    <select name="kd_institusi" id="kd_institusi">
+                        <option value=""> = Pilih Level Akses = </option>
+                <?php
+                foreach($data_institusi as $i){
+                    ?>                        
+                        <option value="<?=$i->kd_institusi?>"><?=$i->nama_institusi?></option>
+                    <?php
+                    }
+                    ?>                        
+
+                    </select>
+                </div>
+            </div>
+
         </div>
+
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
@@ -118,6 +147,22 @@ if (isset($data_hadiah)){
                         </div>
                     </div>
 
+                    <div class="control-group">
+                <label class="control-label">Institusi</label>
+                <div class="controls">
+                    <select name="kd_institusi" id="kd_institusi">
+                        <option value=""> = Pilih Level Akses = </option>
+                <?php
+                foreach($data_institusi as $i){
+                    ?>                        
+                        <option value="<?=$i->kd_institusi?>"><?=$i->nama_institusi?></option>
+                    <?php
+                    }
+                    ?>                        
+
+                    </select>
+                </div>
+            </div>
 
                 </div>
                 <div class="modal-footer">

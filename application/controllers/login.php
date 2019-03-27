@@ -41,20 +41,22 @@ class Login extends CI_Controller{
 	
     function cek_login() {
         //Field validation succeeded.  Validate against database
-        $email = $this->input->post('email');
+        $npp = $this->input->post('npp');
         $password = $this->input->post('password');
         //query the database
-        $result = $this->model_app->login($email, $password);
+        $result = $this->model_app->login($npp, $password);
+// print_r($result);die();        
         if($result) {
             $sess_array = array();
             foreach($result as $row) {
                 //create the session
                 $sess_array = array(
                     'ID' => $row->kd_user,
-                    'EMAIL' => $row->email,
+                    'NPP' => $row->npp,
                     'PASS'=>$row->password,
                     'NAME'=>$row->nama,
                     'LEVEL' => $row->level,
+                    'KD_INSTITUSI' => $row->kd_institusi,
                     'login_status'=>true,
                 );
                 //set session with value from database

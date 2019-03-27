@@ -6,6 +6,27 @@ class Model_app extends CI_Model{
 
     //  ================= AUTOMATIC CODE ==================
 
+    //    KODE Institusi
+    public function getKodeInstitusi()
+    {
+        $q = $this->db->query("select MAX(RIGHT(kd_institusi,3)) as kd_max from institusi");
+        $kd = "";
+        if($q->num_rows()>0)
+        {
+            foreach($q->result() as $k)
+            {
+                $tmp = ((int)$k->kd_max)+1;
+                $kd = sprintf("%03s", $tmp);
+            }
+        }
+        else
+        {
+            $kd = "001";
+        }
+        return "I-".$kd;
+    }
+
+
     //    KODE kuesioner
     public function getKodeKuesioner()
     {
@@ -244,11 +265,11 @@ class Model_app extends CI_Model{
                 ")->result();
     }
 
-    function login($email, $password) {
+    function login($npp, $password) {
         //create query to connect user login database
         $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('email', $email);
+        $this->db->where('npp', $npp);
         $this->db->where('password', MD5($password));
         $this->db->limit(1);
 

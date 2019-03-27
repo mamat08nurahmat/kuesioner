@@ -17,7 +17,7 @@
         
     }
 
-  button {
+#finish {
   background-color: #4CAF50;
   color: #ffffff;
   border: none;
@@ -54,6 +54,7 @@
     
 </head>
 <body>
+    <!-- <button id="myBtn">Try it</button>     -->
 <center>
     <div id="chart"></div>
     <div id="selamat">
@@ -64,12 +65,18 @@
 	<p><input type="hidden"   name="kd_kuesioner" id="kd_kuesioner" value="<?=$kd_kuesioner?>" ></p>
 	<p><input type="hidden"   name="kd_hadiah" id="kd_hadiah" ></p>
 
+
     <button type="submit" id="finish">FINISH</button>
 </form>
 </center>
+
+
+
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
     <script type="text/javascript" charset="utf-8">
+
+
         var padding = {top:20, right:40, bottom:0, left:0},
             w = 500 - padding.left - padding.right,
             h = 500 - padding.top  - padding.bottom,
@@ -135,12 +142,17 @@
                 d.angle = (d.startAngle + d.endAngle)/2;
                 return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
             })
+
             .attr("text-anchor", "end")
             .text( function(d, i) {
                 // return data[i].label;
                 return data[i].nama_hadiah;
             });
-        container.on("click", spin);
+
+            container.on("click", spin);
+ 
+
+
         function spin(d){
             
             container.on("click", null);
@@ -155,7 +167,8 @@
                  pieslice = Math.round(1440/data.length),
                  rng      = Math.floor((Math.random() * 1440) + 360);
                 
-            rotation = (Math.round(rng / ps) * ps);
+            //      rotation = (Math.round(rng / ps) * ps);
+                 rotation = 999999;
             
             picked = Math.round(data.length - (rotation % 360)/ps);
             picked = picked >= data.length ? (picked % data.length) : picked;
@@ -167,7 +180,7 @@
             }
             rotation += 90 - Math.round(ps/2);
             vis.transition()
-                .duration(3000)
+                .duration(5000)
                 .attrTween("transform", rotTween)
                 .each("end", function(){
                     //mark question as seen
