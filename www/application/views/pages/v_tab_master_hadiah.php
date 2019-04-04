@@ -151,7 +151,7 @@ if (isset($data_hadiah)){
                 <label class="control-label">Institusi</label>
                 <div class="controls">
                     <select name="kd_institusi" id="kd_institusi">
-                        <option value=""> = Pilih Level Akses = </option>
+                        <option value="<?php echo $row->kd_institusi;?>"> <?php echo $row->nama_institusi;?> </option>
                 <?php
                 foreach($data_institusi as $i){
                     ?>                        

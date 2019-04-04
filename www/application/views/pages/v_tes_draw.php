@@ -2,7 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Wheel of Fortune Bingo</title>
+    <title>Kuesioner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplikasi Kuesioner">
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="<?php echo base_url('asset/img/logo.png')?>">
+	
     <style type="text/css">
     text{
         font-family:Helvetica, Arial, sans-serif;
@@ -11,9 +16,9 @@
     }
     #chart{
         /* position:absolute; */
-        width:500px;
-        height:500px;
-        top:500px;
+        width:900px;
+        height:900px;
+        padding-top:150px;
         
     }
 

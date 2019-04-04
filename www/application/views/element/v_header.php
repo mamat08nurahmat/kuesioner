@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title><?php echo $title?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aplikasi inventori sederhana dengan CI & Bootstrap">
+    <meta name="description" content="Aplikasi Kuesioner">
     <meta name="author" content="Djava-ui">
 
     <!-- CSS -->
